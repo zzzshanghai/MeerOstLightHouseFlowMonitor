@@ -16,7 +16,7 @@ SecretId = os.environ["SecretId"]
 SecretKey = os.environ["SecretKey"]
 
 regions = ["ap-beijing", "ap-chengdu", "ap-guangzhou", "ap-hongkong", "ap-nanjing", "ap-shanghai", "ap-singapore", "ap-tokyo", "eu-moscow", "na-siliconvalley"]
-percent = 0.002  # 流量限额，1表示使用到100%关机，默认设置为95%
+percent = 0.80  # 流量限额，1表示使用到100%关机，默认设置为95%
 tgToken = os.environ["tgToken"]
 webhook = os.environ["webhook"]
 
@@ -91,9 +91,10 @@ def dofetch(id, key, region):
         TrafficPackageRemaining=str(round(s3['TrafficPackageRemaining']/GB,2)) 
         unUseScore=(float(TrafficUsed)/float(TrafficPackageTotal))*100.0
         UesdScore=(float(TrafficPackageRemaining)/float(TrafficPackageTotal))*100.0
+        shutdownScore=str((float(percent)/1.0)*100.0)
         #告警数据
         global gaojinData
-        gaojinData="腾讯云轻量应用服务器流量告警："+"\n"+"\n"+"流量告警数据:\n"+"已使用："+str(TrafficUsed)+"GB"+"\n"+"总流量："+str(TrafficPackageTotal)+"GB"+"\n"+"剩余量："+str(TrafficPackageRemaining)+"GB"+"\n"+"使用比："+str(unUseScore)+"%"+"\n"+"未用比："+str(UesdScore)+"%"
+        gaojinData="腾讯云轻量应用服务器流量告警："+"\n"+"\n"+"流量告警数据:\n"+"已使用："+str(TrafficUsed)+"GB"+"\n"+"总流量："+str(TrafficPackageTotal)+"GB"+"\n"+"剩余量："+str(TrafficPackageRemaining)+"GB"+"\n"+"使用比："+str(unUseScore)+"%"+"\n"+"未用比："+str(UesdScore)+"%"+"\n"+"关机比："+shutdownScore+"%"
         #获取实例状态          
         print (i+1,"：",InstanceId,":","已使用：",TrafficUsed,"总流量：",TrafficPackageTotal,"剩余：",TrafficPackageRemaining)
         if (InstanceState == "RUNNING"):
