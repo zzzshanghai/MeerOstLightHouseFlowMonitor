@@ -129,13 +129,14 @@ def dofetch(id, key, region):
         #添加时间戳
         print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
         print ("--------------------")
+        gaojinTime="流量告警时间：\n"+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n"+"(该时间较北京时间晚8小时)"+"\n"+"\n"
+        gaojin=gaojinData+"\n"+"\n"+gaojinSatus+"\n"+"\n"+gaojinResult+"\n"+"\n"+gaojinTime
+        sendmessage(gaojin)
+        
 #except TencentCloudSDKException as err: 
  #   print(err) 
 
 if __name__ == '__main__':
      doCheck()
-     gaojinTime="流量告警时间：\n"+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n"+"(该时间较北京时间晚8小时)"+"\n"+"\n"
-     gaojin=gaojinData+"\n"+"\n"+gaojinSatus+"\n"+"\n"+gaojinResult+"\n"+"\n"+gaojinTime
-     sendmessage(gaojin)
     # ck_kafka()
      pass
