@@ -100,8 +100,7 @@ def dofetch(id, key, region):
             print(gaojinSatus)
         
         #添加时间戳
-        print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-        print ("该时间较北京时间晚8小时")
+        print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), "该时间较北京时间晚8小时")
         print ("--------------------")
 
 #except TencentCloudSDKException as err: 
