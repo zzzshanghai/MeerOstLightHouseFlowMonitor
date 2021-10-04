@@ -17,29 +17,7 @@ SecretKey = os.environ["SecretKey"]
 
 regions = ["ap-beijing", "ap-chengdu", "ap-guangzhou", "ap-hongkong", "ap-nanjing", "ap-shanghai", "ap-singapore", "ap-tokyo", "eu-moscow", "na-siliconvalley"]
 percent = 0.80  # 流量限额，1表示使用到100%关机，默认设置为95%
-tgToken = os.environ["tgToken"]
-webhook = os.environ["webhook"]
 
-#钉钉机器人告警   
-def sendmessage(message):
-    url = "https://oapi.dingtalk.com/robot/send?access_token="+webhook
-    HEADERS = {
-        "Content-Type": "application/json ;charset=utf-8"
-    }
-    String_textMsg = {
-        "msgtype": "text",
-        "text": {"content": message},
-        "at": {
-            "atMobiles": [
-                "157********"                                    #如果需要@某人，这里写他的手机号
-            ],
-            "isAtAll": 1                                         #如果需要@所有人，这里写1
-        }
-    }
-    String_textMsg = json.dumps(String_textMsg)
-    res = requests.post(url, data=String_textMsg, headers=HEADERS)
-    print(res.text)
-    
 #key参数  
 def doCheck():
     try:
@@ -115,13 +93,6 @@ def dofetch(id, key, region):
                 req_Stop.from_json_string(json.dumps(params_Stop))
                 resp_Stop = client.StopInstances(req_Stop) 
                 print(resp_Stop.to_json_string())
-                #添加TG酱通知
-                msgContent= InstanceId+ " ：流量超出限制，即将自动关机。" + "剩余流量：" + TrafficPackageRemaining+ "GB"
-                msgUrl="https://tgbot-red.vercel.app/api?token="+ tgToken +"&message="+ msgContent
-                #告警结果：
-                gaojinResult="流量告警结果：\n"+"流量超出限制，即将自动关机。\n"+"剩余流量：" + str(TrafficPackageRemaining)+ "GB"
-                response= requests.get(url=msgUrl).text
-                print (response)        
         else:
             gaojinSatus="流量告警状态：已关机!"
             print("已关机")
@@ -129,10 +100,7 @@ def dofetch(id, key, region):
         #添加时间戳
         print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
         print ("--------------------")
-        gaojinTime="流量告警时间：\n"+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n"+"(该时间较北京时间晚8小时)"+"\n"+"\n"
-        gaojin=gaojinData+"\n"+"\n"+gaojinSatus+"\n"+"\n"+gaojinResult+"\n"+"\n"+gaojinTime
-        sendmessage(gaojin)
-        
+
 #except TencentCloudSDKException as err: 
  #   print(err) 
 
