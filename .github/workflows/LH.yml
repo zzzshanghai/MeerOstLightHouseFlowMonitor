@@ -31,7 +31,5 @@ jobs:
       env:
         SecretId: ${{secrets.SecretId}}
         SecretKey: ${{secrets.SecretKey}}
-        tgToken: ${{secrets.tgToken}}
-        webhook: ${{secrets.webhook}}
       run: |
         python LH.py
