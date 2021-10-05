@@ -4,7 +4,6 @@
 name: 腾讯云轻量应用服务器流量告警
 
 on:
-  workflow_dispatch:
   push:
     branches: 
     - main
