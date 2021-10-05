@@ -31,9 +31,6 @@ jobs:
       env:
         SecretId: ${{secrets.SecretId}}
         SecretKey: ${{secrets.SecretKey}}
-        SmtpUser: ${{secrets.SmtpUser}}
-        SmtpPassword: ${{secrets.SmtpPassword}}
-        SmtpReceiver: ${{secrets.SmtpReceiver}}
 
       run: |
         python LH.py
