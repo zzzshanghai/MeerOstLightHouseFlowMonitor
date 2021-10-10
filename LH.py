@@ -127,9 +127,12 @@ def dofetch(id, key, region):
             print("已关机")
         
         #添加时间戳
-        print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+        time_stamp = time.time()
+        utc_time = datetime.utcfromtimestamp(time_stamp)
+        time1 =str(utc_time + timedelta(hours=8))
+        print (time1)
         print ("--------------------")
-        gaojinTime="流量告警时间：\n"+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n"+"(该时间较北京时间晚8小时)"+"\n"+"\n"
+        gaojinTime="流量告警时间：\n"+time1+"\n"+"\n"+"\n"
         gaojin=gaojinData+"\n"+"\n"+gaojinSatus+"\n"+"\n"+gaojinResult+"\n"+"\n"+gaojinTime
         sendmessage(gaojin)
         
