@@ -2,6 +2,8 @@ import json
 import time
 import requests
 import os
+from datetime import datetime
+from datetime import timedelta
 from tencentcloud.common import credential
 from tencentcloud.common.profile.client_profile import ClientProfile
 from tencentcloud.common.profile.http_profile import HttpProfile
@@ -100,7 +102,10 @@ def dofetch(id, key, region):
             print (gaojinSatus)
         
         #添加时间戳
-        print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), "（该时间较北京时间晚8小时）")
+        time_stamp = time.time()
+        utc_time = datetime.utcfromtimestamp(time_stamp)
+        time1 =str(utc_time + timedelta(hours=8))
+        print (time1)
         print ("---------------------------------------------")
 
 #except TencentCloudSDKException as err: 
