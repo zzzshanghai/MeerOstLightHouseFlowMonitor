@@ -3,100 +3,127 @@
 基于https://github.com/2lifetop/LightHouse_Automatic_Shutdown 二改
 
 教程：
-# Hexo主题Aurora的魔改（一）
+## 情景引入
 
-刚接触`Hexo`，就碰到了这么好的主题，如图是`Aurora`作者的博客展示：
+> 众所周知，作为“良心云”的腾讯云很早之前就推出了`轻量应用服务器`，其中最受青睐的就是香港轻量应用服务器了，作为一枚穷人，博主也是用的1H2G的香港轻量。虽然性价比高，但也有无奈的一面，如：每月流量限制，超出另计费。作为白嫖党，自然不能因为DDOS而让自己走上破产。所以我借助 <a href="https://github.com/2lifetop/LightHouse_Automatic_Shutdown/" target="_blank" rel="nofollow">2lifetop</a> 提供的源代码，实现了实时流量监控以及超出流量限制自动关机。
 
-你可以从去<a href="https://github.com/auroral-ui/hexo-theme-aurora" target="_blank" rel="nofollow">Github</a>了解`Hexo`和`Aurora`主题。
+## 设置ID和KEY
 
-![Aurora主题展示](https://gitee.com/MeerOst/MeerOstDrawingBed/raw/master/RaumzeitBlog/202108111419889.png)
+> 由于项目需要腾讯云服务器的实时数据和钉钉机器人。
+>
+> 所以需要设置腾讯云的`SecretId`和`SecretKey`，以及钉钉机器人的`Token`。
 
-虽然主题很好看，但是对于刚接触`Hexo`，折腾起来是有点棘手。
+### 获取腾讯云API密钥
 
-安装出现问题，主题修改摸不着头脑，`Deploy`出现问题。
+前往 <a href="https://console.cloud.tencent.com/cam/capi" target="_blank" rel="nofollow">访问密钥 - 控制台</a> ，点击新建 密钥，复制获取的`SecretId`和`SecretKey`，等一会儿会用到。
 
-下面我将从替换源站静态文件和图片文件链接，以及替换`cdnjs.cloudflare.com`链接两个方面来介绍我修改的内容，以后可能还有，敬请期待。
+![腾讯云API](https://gitee.com/MeerOst/MeerOstDrawingBed/raw/master/RaumzeitBlog/202108122140610.JPG)
 
-## 替换源站链接
+### 获取钉钉机器人Token
 
-由于`github.io`在国内的访问速度很慢，而且也不容易被爬虫抓取，所以我果断选择了在自己的服务器上部署hexo发布的静态文件，关于 如何通过宝塔在自己的服务器上部署`hexo`站点，可以参考 这两位 博主的做法 :
+打开电脑端的钉钉，新建一个群，打开群设置，点击智能群助手下的添加机器人，
 
-<a href="https://www.heson10.com/posts/51315.html" target="_blank" rel="nofollow">Hexo 部署至云服务器（宝塔面板） - 黑石博客 - Hexo博客 (heson10.com)</a>
+![钉钉机器人](https://gitee.com/MeerOst/MeerOstDrawingBed/raw/master/RaumzeitBlog/202108122153576.JPG)
 
-<a href="https://www.jsopy.com/2020/03/08/setuphexo/" target="_blank" rel="nofollow">用宝塔面板将hexo部署到阿里云 | JSOPY</a>
+再选择自定义机器人，
 
-如果` Hexo d `时碰到 `bash: git-receive-pack: command not found fatal: Could not read from remote repository. `这样的问题，可以参考：
+![钉钉机器人](https://gitee.com/MeerOst/MeerOstDrawingBed/raw/master/RaumzeitBlog/202108122311879.JPG)
 
-<a href="https://blog.csdn.net/li1325169021/article/details/111874334" target="_blank" rel="nofollow">bash: git-receive-pack: command not found fatal: Could not read from remote repository._小志的博客-CSDN博客</a>
+再根据图示：
 
-但是问题又来了，由于我是用的腾讯云的1H2G的香港轻量，资源不够，所以想像`wordpress`那样弄一个CDN，以及自动替换源站链接为CDN链接，但是搜索了一圈，也没能找到好的方法来自动替换链接，以下是我搜索到的方法，都不太有用，如果有网友实验成功，可以告知以下博主，我也想白嫖。
+![钉钉机器人](https://gitee.com/MeerOst/MeerOstDrawingBed/raw/master/RaumzeitBlog/202108122155892.JPG)
 
-<a href="https://renzibei.com/2020/07/12/使用jsdelivr-CDN-加速hexo的图片等静态资源加载/" target="_blank" rel="nofollow">自动使用jsdelivr CDN 加速hexo的图片等静态资源加载 | 鸿雁自南人自北 (renzibei.com)</a>
+先填写机器人名称，再将安全设置的自定义关键词打勾，填写关键词为“流量告警”。
 
-<a href="https://segmentfault.com/a/1190000022531769" target="_blank" rel="nofollow">使用 jsDelivr 免费加速 GitHub Pages 博客的静态资源 - SegmentFault 思否</a>
+最后找到“4”中的`Token`，其链接形式如`https://oapi.dingtalk.com/robot/send?access_token=973e7b241234567890141d60c24e9e71234567890d7a4cef18ed9ec2fedfvfd`
 
-<a href="https://blog.yuanpei.me/posts/1417719502/" target="_blank" rel="nofollow">使用 jsDelivr 为 Hexo 博客提供高效免费的CDN加速 | 素履独行 (yuanpei.me)</a>
+只需记录`token`后面的值，即`973e7b241234567890141d60c24e9e71234567890d7a4cef18ed9ec2fedfvfd`
 
-暂时没法，只能一个个去替换使用的链接，
+## `Github Fork`项目，设置相关数据
 
-### 1.替换head里的link
+### `Fork`项目
 
-找到路径：`Hexo\node_modules\hexo-theme-aurora\layout\index.js`
+前往 <a href="https://github.com/MeerOst/MeerOstLightHouseFlowMonitor" target="_blank">腾讯云轻量应用服务器流量告警</a> 点击右上角的`Fork`按钮。
 
-修改head头里面的引用链接，如：
+### 相关配置
 
-`/favicon.ico`
+#### ID和Key设置
 
-`/static/css/chunk-libs.eebac533.css`
+打开你的流量监控的项目仓库，并找到仓库设置，选择Secrets，再点击`New repository secret`按钮新建`Secret`
 
-`/static/css/app.0d31776f.css`
+![Github](https://gitee.com/MeerOst/MeerOstDrawingBed/raw/master/RaumzeitBlog/202108122213998.JPG)
 
-将这些链接修改为你的cdn链接，如`jsdelivr`
+然后像这样填写相关数据：
 
-### 2.其他链接替换
+![Github](https://gitee.com/MeerOst/MeerOstDrawingBed/raw/master/RaumzeitBlog/202108122213647.JPG)
 
-还是上面的`index.ejs`文件，ctrl+f搜索  ` i.p="/"   `
+ 其中四个相关值的填写格式如下：
 
-将  ` i.p="/" `  改为cdn链接 ，如：`i.p="https://cdn.jsdelivr.net/gh/MeerOst/meerost.github.io@master/"`
+```yaml
+- SecretId
+ name: SecretId
+ value: AKIDe8NL2TeABCDEABCDE8AxTigNnyt12345 
+- SecretKey
+ name: SecretKey
+ value: NUKvFI4dy2pMdePu812345wdoasebcde
+- 钉钉机器人token
+ name: webhook
+ value: "973e7b241234567890141d60c24e9e71234567890d71234518ed9ec2fe123456" #注意添加双引号
+```
 
-这样即可，去游览器f12，可以看到源站链接只有html和json文件了
+#### 修改配置
 
-## 替换`cdnjs.cloudflare.com`链接
+##### 更改运行频率：
 
-由于主题引用了`cdnjs.cloudflare.com`链接，而这个域名在国内访问慢，ping值高，所以速度并不理想，甚至还会出现一直绕圈的情况。所以需要替换链接，
+这可以通过修改`.github/workflows/LH.yml`中`schedule`的`cron`参数来达到目的，
 
-f12查看，原来是由于引用了`clipboard.min.js`文件，而这个文件的引用链接并没有出现在主题文件里面，说明是引用的外部文件里面包含了这个`clipboard.min.js`文件的引用链接，查与`clipboard`相关的外部文件，发现是`prism-copy-to-clipboard.min.js`文件，引用了`clipboard.min.js`文件，现在只需修改`prism-copy-to-clipboard.min.js`引用链接就可以了。
+如我的，每5分钟运行一次就是：
 
-这里有许多方法，你可以自己琢磨一下，我的方法是，
+```yml
+  schedule:
+    - cron: "*/5 * * * *"
+```
 
-### 1.下载`clipboard.min.js`文件
+如果需要修改成其他的频率，请参考[2lifetop](https://2demo.top/231.html)提供的教程。
 
-下载`clipboard.min.js`文件，并上传到github上，找到其jsdelivr的cdn链接
+##### 关机百分比
 
-，如：`https://cdn.jsdelivr.net/gh/MeerOst/MeerOstPubilcStatic/ajax/libs/clipboard.js/2.0.0/clipboard.min.js`
+此举的目的是，如果服务器的流量达到你设定的百分比，就自行关机，可以根据实际情况更改。
 
-### 1.下载`prism-copy-to-clipboard.min.js`
+如图：你需要修改这个`LH.py`中的`percent`值
 
-下载`prism-copy-to-clipboard.min.js`文件，将`https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js`链接替换为jsdelivr的cdn链接，最后将`prism-copy-to-clipboard.min.js`文件上传到`github`，并找到其`jsdelivr`的cdn链接，如：`https://cdn.jsdelivr.net/gh/MeerOst/MeerOstPubilcStatic/npm/prismjs@1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js`
+![Github](https://gitee.com/MeerOst/MeerOstDrawingBed/raw/master/RaumzeitBlog/202108122232807.JPG)
 
-### 3.替换本地文件链接
+## 运行项目
 
-找到本地路径：`Hexo\\node_modules\hexo-theme-aurora\data\en.yml` 打开`en.yml`文件，或`Hexo\\node_modules\hexo-theme-aurora\data\en.yml`的`cn.yml`文件（看你`_config.aurora.yml`里面的cdn配置使用的是cn还是en）将`prism-copy-to-clipboard.min.js`文件的引用链接替换为上面的`jsdelivr`的cdn链接。
+根据如图的顺序即可运行配置
 
-:::tip Valine评论无法显示问题
+![Github](https://gitee.com/MeerOst/MeerOstDrawingBed/raw/master/RaumzeitBlog/202108122237405.JPG)
 
-​	- 如果你在cdn配置为en时，valine会出现无法显示的情况（cn我不知道会不会也有这种情况）
+你也可以点击运行的项目查看运行结果
 
-​	- 最后查明是`Valine.min.js`文件报错：不存在，你需要找到
+> 效果展示：
+>
+> ### `github`
+>
+> ![Github](https://gitee.com/MeerOst/MeerOstDrawingBed/raw/master/RaumzeitBlog/202108122248062.JPG)
+>
+> ### 钉钉
+>
+> ![钉钉机器人](https://gitee.com/MeerOst/MeerOstDrawingBed/raw/master/RaumzeitBlog/202108122251320.JPG)
 
-​	- `Hexo\node_modules\hexo-theme-aurora\data\en.yml `
+> 
 
-​	- 文件，将其中`Valine.min.js`的引用链接改为
+> 这其中也有TG酱 ，可以通知关机信息，由于其需要科学上网，所以我并没有设置
 
-​	- `https://cdn.jsdelivr.net/`
+> 你可以去`telegram`搜索 <a href="https://t.me/realtgchat_bot" target="_blank" rel="nofollow">@realtgchat_bot</a>，获取`token`
 
-​	- `npm/valine@1.4.14/dist/`
+> 其在`Secrets`的数据填写形式如下：
 
-​	- `Valine.min.js`(请自行需要将链接拼接)。
+```yaml
+- TG酱
+ name: tgToken
+ value: "WnU3abcdREYxNjQ5NzA12345" #注意双引号
+```
 
-:::
+> 最后，由衷感谢 <a href="https://github.com/2lifetop/LightHouse_Automatic_Shutdown/" target="_blank" rel="nofollow">2lifetop </a> 提供的源码。
