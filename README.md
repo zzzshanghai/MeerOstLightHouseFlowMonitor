@@ -17,7 +17,8 @@
 
 前往 <a href="https://console.cloud.tencent.com/cam/capi" target="_blank" rel="nofollow">访问密钥 - 控制台</a> ，点击新建 密钥，复制获取的`SecretId`和`SecretKey`，等一会儿会用到。
 
-![腾讯云API](https://gitee.com/MeerOst/MeerOstDrawingBed/raw/master/RaumzeitBlog/202108122140610.JPG)
+![202108122140610](https://user-images.githubusercontent.com/72482686/167847159-649e98eb-92a2-4f97-a786-0c9ec0d28dbb.jpg)
+
 
 ### 获取钉钉机器人Token
 
