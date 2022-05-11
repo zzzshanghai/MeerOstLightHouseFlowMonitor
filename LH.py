@@ -121,7 +121,7 @@ def dofetch(id, key, region):
                 msgContent= InstanceId+ " ：流量超出限制，即将自动关机。" + "剩余流量：" + TrafficPackageRemaining+ "GB"
                 msgUrl="https://tgbot-red.vercel.app/api?token="+ tgToken +"&message="+ msgContent
                 #告警结果：
-                gaojinResult="流量告警结果：\n"+"流量超出限制，即将自动关机。\n"+"剩余流量：" + str(TrafficPackageRemaining)+ "GB"
+                gaojinResult="流量告警结果：\n"+"流量超出限制，即将自动关机。"
                 response= requests.get(url=msgUrl).text
                 print (response)        
         else:
@@ -139,7 +139,7 @@ def dofetch(id, key, region):
                 msgContent= InstanceId+ " ：流量有剩余，即将自动开机。" + "剩余流量：" + TrafficPackageRemaining+ "GB"
                 msgUrl="https://tgbot-red.vercel.app/api?token="+ tgToken +"&message="+ msgContent
                 #告警结果：
-                gaojinResult="流量告警结果：流量有剩余，即将自动开机。\n"+"剩余流量：" + str(TrafficPackageRemaining)+ "GB"
+                gaojinResult="流量告警结果：流量有剩余，即将自动开机。"
                 gaojinSatus="该服务器状态：已关机!"
                 response= requests.get(url=msgUrl).text
                 print (response)
