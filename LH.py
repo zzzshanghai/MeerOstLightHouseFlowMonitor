@@ -96,7 +96,7 @@ def dofetch(id, key, region):
         shutdownScore=(float(percent)/1.0)*100.0
         #告警数据
         global gaojinData
-        gaojinData="腾讯云轻量应用服务器流量告警："+"\n"+"\n"+"服务器："+"["+str(i+1)+"]"+" "+str(InstanceId)+"\n"+"\n"+"流量告警数据:\n"+"已使用："+str(TrafficUsed)+"GB"+"\n"+"总流量："+str(TrafficPackageTotal)+"GB"+"\n"+"剩余量："+str(TrafficPackageRemaining)+"GB"+"\n"+"使用比："+str("%.5f"%unUseScore)+"%"+"\n"+"未用比："+str("%.4f"%UesdScore)+"%"+"\n"+"关机比："+str("%.4f"%shutdownScore)+"%"
+        gaojinData="腾讯云轻量应用服务器流量告警："+"\n"+"\n"+"服务器："+"["+str(i+1)+"]"+" "+str(InstanceId)+"\n"+"\n"+"流量告警数据:\n"+"已使用："+str(TrafficUsed)+"GB"+"\n"+"总流量："+str(TrafficPackageTotal)+"GB"+"\n"+"剩余量："+str(TrafficPackageRemaining)+"GB"+"\n"+"使用比："+str("%.6f"%unUseScore)+"%"+"\n"+"未用比："+str("%.5f"%UesdScore)+"%"+"\n"+"关机比："+str("%.5f"%shutdownScore)+"%"
         #获取实例状态          
         print (i+1,"：",InstanceId,":","已使用：",TrafficUsed,"总流量：",TrafficPackageTotal,"剩余：",TrafficPackageRemaining)
         if (InstanceState == "RUNNING"):
