@@ -55,7 +55,6 @@
 
 然后像这样填写相关数据：
 
-![Github](https://gitee.com/MeerOst/MeerOstDrawingBed/raw/master/RaumzeitBlog/202108122213647.JPG)
 ![Snipaste_2022-05-11_20-07-34](https://user-images.githubusercontent.com/72482686/167846278-c5ef4e9a-abda-4fe4-b104-6620035cd077.png)
 
 
