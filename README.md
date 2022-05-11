@@ -56,27 +56,8 @@
 然后像这样填写相关数据：
 
 ![Github](https://gitee.com/MeerOst/MeerOstDrawingBed/raw/master/RaumzeitBlog/202108122213647.JPG)
+![Snipaste_2022-05-11_20-07-34](https://user-images.githubusercontent.com/72482686/167846278-c5ef4e9a-abda-4fe4-b104-6620035cd077.png)
 
- 其中四个相关值的填写格式如下：
-
-> SecretId
- > > name（名称）:
- > > ` SecretId`
- > > value(值): 
- > > `AKIDe8NL2TeABCDEABCDE8AxTigNnyt12345` 
- > > 
-> SecretKey
- > > name（名称）: 
- > > `SecretKey`
- > > value（名称）: 
- > > `NUKvFI4dy2pMdePu812345wdoasebcde`
- > > 
-> 钉钉机器人token
- > > name（名称）: 
- > > `webhook`
- > > value（名称）: 
- > > `"973e7b241234567890141d60c24e9e71234567890d71234518ed9ec2fe123456"` 
- (注意：钉钉机器人token的值记得添加双引号)
 
 
 #### 修改配置
