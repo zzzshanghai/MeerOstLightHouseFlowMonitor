@@ -59,17 +59,25 @@
 
  其中四个相关值的填写格式如下：
 
-```yaml
-- SecretId
- name: SecretId
- value: AKIDe8NL2TeABCDEABCDE8AxTigNnyt12345 
-- SecretKey
- name: SecretKey
- value: NUKvFI4dy2pMdePu812345wdoasebcde
-- 钉钉机器人token
- name: webhook
- value: "973e7b241234567890141d60c24e9e71234567890d71234518ed9ec2fe123456" #注意添加双引号
-```
+> SecretId
+ > > name（名称）:
+ > > ` SecretId`
+ > > value(值): 
+ > > `AKIDe8NL2TeABCDEABCDE8AxTigNnyt12345` 
+ > > 
+> SecretKey
+ > > name（名称）: 
+ > > `SecretKey`
+ > > value（名称）: 
+ > > `NUKvFI4dy2pMdePu812345wdoasebcde`
+ > > 
+> 钉钉机器人token
+ > > name（名称）: 
+ > > `webhook`
+ > > value（名称）: 
+ > > `"973e7b241234567890141d60c24e9e71234567890d71234518ed9ec2fe123456"` 
+ (注意：钉钉机器人token的值记得添加双引号)
+
 
 #### 修改配置
 
@@ -120,10 +128,11 @@
 
 > 其在`Secrets`的数据填写形式如下：
 
-```yaml
-- TG酱
- name: tgToken
- value: "WnU3abcdREYxNjQ5NzA12345" #注意双引号
-```
+> TG酱
+ > > name(名称): 
+ > > `tgToken`
+ > > value（值）: 
+ > > `"WnU3abcdREYxNjQ5NzA12345"`
+ （注意添加双引号）
 
 > 最后，由衷感谢 <a href="https://github.com/2lifetop/LightHouse_Automatic_Shutdown/" target="_blank" rel="nofollow">2lifetop </a> 提供的源码。
