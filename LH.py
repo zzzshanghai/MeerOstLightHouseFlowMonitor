@@ -18,7 +18,7 @@ SecretId = os.environ["SecretId"]
 SecretKey = os.environ["SecretKey"]
 
 regions = ["ap-beijing", "ap-chengdu", "ap-guangzhou", "ap-hongkong", "ap-nanjing", "ap-shanghai", "ap-singapore", "ap-tokyo", "eu-moscow", "na-siliconvalley"]
-percent = 0.5  # 流量限额，1表示使用到100%关机，默认设置为50%
+percent = 0.0001  # 流量限额，1表示使用到100%关机，默认设置为50%
 tgToken = os.environ["tgToken"]
 webhook = os.environ["webhook"]
 
