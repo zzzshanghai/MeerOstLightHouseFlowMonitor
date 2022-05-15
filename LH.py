@@ -35,7 +35,7 @@ def sendmessage(message):
             "atMobiles": [
                 "157********"                                    #如果需要@某人，这里写他的手机号
             ],
-            "isAtAll": 1                                         #如果需要@所有人，这里写1
+            "isAtAll": 0                                         #如果需要@所有人，这里写1
         }
     }
     String_textMsg = json.dumps(String_textMsg)
