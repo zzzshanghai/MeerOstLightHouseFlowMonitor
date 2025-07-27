@@ -102,8 +102,8 @@ def dofetch(id, key, region):
             print (gaojinSatus)
         
         #添加时间戳
-        time_stamp = int(time.time())
-        utc_time = datetime.now(time_stamp)
+        #time_stamp = int(time.time())
+        utc_time = datetime.now()
         time1 =str(utc_time + timedelta(hours=8))
         print (time1)
         print ("---------------------------------------------")
