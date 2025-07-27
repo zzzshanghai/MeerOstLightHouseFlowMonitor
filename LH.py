@@ -102,7 +102,7 @@ def dofetch(id, key, region):
             print (gaojinSatus)
         
         #添加时间戳
-        utc_time = datetime.now(pytz.timezone('Asia/Shanghai'))
+        utc_time = datetime.now()
         print (utc_time)
         print ("---------------------------------------------")
 
