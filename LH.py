@@ -2,8 +2,10 @@ import json
 import time
 import requests
 import os
+import typz
 from datetime import datetime
 from datetime import timedelta
+from typz import timezone
 from tencentcloud.common import credential
 from tencentcloud.common.profile.client_profile import ClientProfile
 from tencentcloud.common.profile.http_profile import HttpProfile
@@ -102,7 +104,7 @@ def dofetch(id, key, region):
             print (gaojinSatus)
         
         #添加时间戳
-        utc_time = datetime.now()
+        utc_time = datetime.now(pytz.timezone('Asia/Shanghai') )
         print (utc_time)
         print ("---------------------------------------------")
 
