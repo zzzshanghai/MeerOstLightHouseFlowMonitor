@@ -103,8 +103,7 @@ def dofetch(id, key, region):
         
         #添加时间戳
         utc_time = datetime.now(pytz.timezone('Asia/Shanghai'))
-        time1 =str(utc_time + timedelta(hours=8))
-        print (time1)
+        print (utc_time)
         print ("---------------------------------------------")
 
 #except TencentCloudSDKException as err: 
@@ -112,5 +111,4 @@ def dofetch(id, key, region):
 
 if __name__ == '__main__':
      doCheck()
-    # ck_kafka()
      pass
