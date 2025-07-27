@@ -9,4 +9,4 @@ updates:
   ignore:
   - dependency-name: tencentcloud-sdk-python
     versions:
-    - 3.0.1128
+    - 3.0.1430
