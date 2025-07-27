@@ -104,8 +104,9 @@ def dofetch(id, key, region):
             print (gaojinSatus)
         
         #添加时间戳
-        utc_time = datetime.now(pytz.timezone('Asia/Shanghai') )
-        print (utc_time)
+        utc_time = pytz.timezone('Asia/Shanghai')
+        time1 = datetime.now(utc_time)
+        print (time1)
         print ("---------------------------------------------")
 
 #except TencentCloudSDKException as err: 
