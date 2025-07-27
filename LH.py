@@ -2,7 +2,6 @@ import json
 import time
 import requests
 import os
-import typz
 from datetime import datetime
 from datetime import timedelta
 from typz import timezone
